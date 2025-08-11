@@ -117,7 +117,7 @@ func cleanupLimiters(interval time.Duration, expireAfter time.Duration) {
 	defer ticker.Stop()
 
 	for range ticker.C {
-		utils.Errorf("Starting rate limiter cleanup...")
+		utils.Infof("Starting rate limiter cleanup...")
 
 		var expiredKeys []string
 
@@ -139,7 +139,7 @@ func cleanupLimiters(interval time.Duration, expireAfter time.Duration) {
 			ipLimiters.Delete(k)
 			ipLastAccess.Delete(k)
 			ipBlockedUntil.Delete(k)
-			utils.Errorf(fmt.Sprintf("Cleaned up limiter and block info for key: %s", k))
+			utils.Infof(fmt.Sprintf("Cleaned up limiter and block info for key: %s", k))
 		}
 	}
 }
