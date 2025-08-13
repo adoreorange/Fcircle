@@ -197,20 +197,6 @@ func fixBrokenHTML(s string) string {
 		s += "</a>"
 	}
 
-	// 补全 pre 标签
-	preOpenCount := strings.Count(s, "<pre")
-	preCloseCount := strings.Count(s, "</pre>")
-	for i := 0; i < preOpenCount-preCloseCount; i++ {
-		s += "</pre>"
-	}
-
-	// 补全 code 标签
-	codeOpenCount := strings.Count(s, "<code")
-	codeCloseCount := strings.Count(s, "</code>")
-	for i := 0; i < codeOpenCount-codeCloseCount; i++ {
-		s += "</code>"
-	}
-
 	return s
 }
 
@@ -228,7 +214,6 @@ func ExtractCleanHTML(htmlStr string) string {
 		switch n.Type {
 		case html.TextNode:
 			builder.WriteString(n.Data)
-
 		case html.ElementNode:
 			switch n.Data {
 			case "a":
@@ -243,17 +228,8 @@ func ExtractCleanHTML(htmlStr string) string {
 					traverse(c)
 				}
 				builder.WriteString("</a>")
-
 			case "br":
 				builder.WriteString("<br/>")
-
-			case "pre", "code": // 新增保留 pre/code
-				builder.WriteString("<" + n.Data + ">")
-				for c := n.FirstChild; c != nil; c = c.NextSibling {
-					traverse(c)
-				}
-				builder.WriteString("</" + n.Data + ">")
-
 			default:
 				// 其他标签忽略，只遍历子节点
 				for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -262,7 +238,6 @@ func ExtractCleanHTML(htmlStr string) string {
 			}
 
 		default:
-			// 其他节点也遍历子节点
 			for c := n.FirstChild; c != nil; c = c.NextSibling {
 				traverse(c)
 			}
