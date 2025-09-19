@@ -6,7 +6,7 @@ task:
   cron_expr: 0 0 3 * * *
 
 rss:
-  config_url: "https://cdn.aimiliy.top/npm/json/RSS.json"
+  config_url: "https://source.adoreorg.cn/json/RSS.json"
   output_file: "output/feed_result.json"
 
 
