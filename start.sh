@@ -3,6 +3,11 @@
 # 设置应用程序的名称
 APP_NAME="fcircle"
 
+# 创建必要的目录
+echo "📁 创建必要的目录..."
+mkdir -p /app/output
+chmod 755 /app/output
+
 # 检查进程是否存在
 pid=$(pgrep -f $APP_NAME)
 

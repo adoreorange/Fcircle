@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 )
@@ -17,6 +18,15 @@ var (
 func InitLog(logFile string) error {
 	var err error
 	once.Do(func() {
+		// 确保日志目录存在
+		dir := filepath.Dir(logFile)
+		if dir != "." && dir != "/" {
+			if e := os.MkdirAll(dir, 0755); e != nil {
+				err = e
+				return
+			}
+		}
+		
 		f, e := os.OpenFile(logFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 		if e != nil {
 			err = e
