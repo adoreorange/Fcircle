@@ -33,7 +33,7 @@ services:
       - SERVER_PORT=8080                     # 对应 容器启动端口
       - SECRET_KEY=#####                     # /fetch接口手动请求密钥
       - CRON_EXPR=0 0 3 * * *           # 设置定时调用的间隔时间
-      - CONFIG_URL=https://cdn.aimiliy.top/npm/json/RSS.json  # 配置文件url
+      - CONFIG_URL=https://source.adoreorg.cn/json/RSS.json  # 配置文件url
       - OUTPUT_FILE=output/feed_result.json   # 朋友圈json文件路径
       - LOG_FILE=output/crawl.log   # 日志文件路径
 
